@@ -12,6 +12,6 @@ namespace pohuy
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = false;
 
-        public ushort Time { get; set; } = 5;
+        public ushort Time { get; set; } = 10;
     }
 }
