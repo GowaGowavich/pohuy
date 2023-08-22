@@ -19,21 +19,8 @@ namespace pohuy
         }
         public override void OnEnabled()
         {
-            Exiled.Events.Handlers.Player.Verified += Player_Verified;
-        }
-
-        private void Player_Verified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
-        {
-            Timing.RunCoroutine(MyCoroutine(ev.Player));
-        }
-
-        public IEnumerator<float> MyCoroutine(Exiled.API.Features.Player player)
-        {
-            for (; ; )
-            {
-                player.Broadcast(Configs.Time,"kek");
-                yield return Timing.WaitForSeconds(5f);
-            }
+            OnEnabled();
+            Exiled
         }
     }
 }
