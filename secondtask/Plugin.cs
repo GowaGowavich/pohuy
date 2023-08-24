@@ -1,10 +1,6 @@
-﻿using CommandSystem.Commands.RemoteAdmin;
-using Exiled.API.Features;
-using Exiled.API.Features.Pickups;
-using PluginAPI.Events;
+﻿using Exiled.API.Features;
 using Pochemu;
-using System;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace secondtask
 {
@@ -18,6 +14,12 @@ namespace secondtask
             Exiled.Events.Handlers.Server.LocalReporting += Server_LocalReporting;
             Exiled.Events.Handlers.Player.TriggeringTesla += Player_TriggeringTesla;
             Exiled.Events.Handlers.Map.ExplodingGrenade += Map_ExplodingGrenade;
+            Exiled.Events.Handlers.Server.EndingRound += Server_EndingRound;
+        }
+
+        private void Server_EndingRound(Exiled.Events.EventArgs.Server.EndingRoundEventArgs ev)
+        {
+            Reportslist.Reports.Clear();
         }
 
         private void Map_ExplodingGrenade(Exiled.Events.EventArgs.Map.ExplodingGrenadeEventArgs ev)
@@ -26,19 +28,10 @@ namespace secondtask
             {
                 foreach (Lift lift in Lift.List)
                 {
-                    if (lift.Position.Equals(ev.Projectile.Position)) continue;
-                    Random random = new Random();
-                    if (random.Next(1, 101) <= 50)
+                    if (lift.IsInElevator(ev.Projectile.Position))
+                    if (Random.Range(1, 101) <= 50)
                     {
-                        switch (lift.CurrentLevel)
-                        {
-                            case 1:
-                                lift.TryStart(0);
-                                break;
-                            case 0:
-                                lift.TryStart(1);
-                                break;
-                        }
+                        lift.TryStart(lift.CurrentLevel == 1 ? 0 : 1);
                     }
                 }
             }
@@ -59,7 +52,7 @@ namespace secondtask
             Reportslist.Reports.Add($"Жалоба от {igrok} на {pidoras}. Причина:{ev.Reason}");
             foreach (Player admins in Player.List)
             {
-                if (admins.ReferenceHub.serverRoles.RemoteAdmin)
+                if (admins.RemoteAdminAccess)
                 {
                     admins.Broadcast(10, $"Игрок {igrok} подал жалобу на игрока {pidoras}. \nПричина:{ev.Reason}");
                 }

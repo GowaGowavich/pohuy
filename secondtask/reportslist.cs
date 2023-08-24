@@ -14,7 +14,7 @@ namespace Pochemu
         public string[] Aliases => new string[] { "replist" };
 
         public string Description => "Тут список всех плохих людей!";
-        public static List<string> Reports { get; } = new List<string>() { "Список нарущений:" };
+        public static List<string> Reports { get; } = new List<string>() {};
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {

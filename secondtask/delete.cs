@@ -22,33 +22,30 @@ namespace secondtask
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             var plaor = Player.Get(sender);
-            if (arguments.Count == 1)
+            if (arguments.Count == 1 && int.TryParse(arguments.At(0), out var radius))
             {
                 var predmetov = 0;
                 var trupov = 0;
-                int radiuse = int.Parse(string.Join(" ", arguments));
                 foreach (Pickup item in Pickup.List)
                 {
-                    if (Vector3.Distance(item.Position, plaor.Position) <= radiuse)
+                    if (Vector3.Distance(item.Position, plaor.Position) <= radius)
                     {
                         item.Destroy();
-                        predmetov = predmetov + 1;
+                        ++predmetov;
                     }
                 }
                 foreach (Ragdoll item in Ragdoll.List)
                 {
-                    if (Vector3.Distance(item.Position, plaor.Position) <= radiuse)
+                    if (Vector3.Distance(item.Position, plaor.Position) <= radius)
                     {
                         item.Destroy();
-                        trupov = trupov + 1;
+                        ++trupov;
                     }
                 }
-                plaor.RemoteAdminMessage($"Было удаленно {trupov} трупов и {predmetov} предметов в радиусе {radiuse}.");
-                response = "";
+                response = $"Было удаленно {trupov} трупов и {predmetov} предметов в радиусе {radius}.";
                 return true;
             }
-            plaor.RemoteAdminMessage("Не правильно введён радиус.");
-            response = "";
+            response = "Не правильно введён радиус.";
             return false;
         }
     }
