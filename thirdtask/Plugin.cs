@@ -139,7 +139,6 @@ namespace thirdtask
             {
                 ev.IsAllowed = false;
                 igrok.RandomTeleport(typeof(Room));
-                igrok.Broadcast(4, $"{tp}");
             }
         }
     }
