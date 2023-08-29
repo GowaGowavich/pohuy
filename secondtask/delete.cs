@@ -3,7 +3,6 @@ using Exiled.API.Features;
 using Exiled.API.Features.Pickups;
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
 using UnityEngine;
 
 namespace secondtask
@@ -26,6 +25,7 @@ namespace secondtask
             {
                 var predmetov = 0;
                 var trupov = 0;
+
                 foreach (Pickup item in Pickup.List)
                 {
                     if (Vector3.Distance(item.Position, plaor.Position) <= radius)

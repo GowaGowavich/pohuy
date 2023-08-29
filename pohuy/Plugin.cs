@@ -20,7 +20,6 @@ namespace pohuy
         public override void OnEnabled()
         {
             OnEnabled();
-            Exiled
         }
     }
 }

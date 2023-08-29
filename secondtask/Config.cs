@@ -1,7 +1,4 @@
-﻿using Exiled.API.Features.Items;
-using Exiled.API.Interfaces;
-using Exiled.Events.Handlers;
-using PluginAPI.Core.Items;
+﻿using Exiled.API.Interfaces;
 using System.Collections.Generic;
 
 namespace secondtask
