@@ -3,11 +3,8 @@ using Exiled.API.Features;
 using Hazards;
 using MEC;
 using PlayerRoles;
-using PluginAPI.Roles;
 using Respawning;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace thirdtask
@@ -87,7 +84,7 @@ namespace thirdtask
                         break;
                 }
             }
-            else { Status = "Боеголовка взорвана";};
+            else { Status = "Боеголовка взорвана"; };
         }
 
         private void Player_StayingOnEnvironmentalHazard(Exiled.Events.EventArgs.Player.StayingOnEnvironmentalHazardEventArgs ev)
@@ -130,16 +127,16 @@ namespace thirdtask
             var efect = Config.ChanceDamage;
             var damage = Config.ChanceDamage;
             var tp = Config.ChanceTp;
-            if (UnityEngine.Random.Range(0, 101) < efect)
+            if (Random.Range(0, 101) < efect)
             {
                 var effect = Config.NegEffect.RandomItem();
                 igrok.EnableEffect(effect);
             }
-            if (UnityEngine.Random.Range(0, 101) < damage)
+            if (Random.Range(0, 101) < damage)
             {
-                igrok.Hurt(UnityEngine.Random.Range(0, 100));
+                igrok.Hurt(Random.Range(0, 100));
             }
-            if (UnityEngine.Random.Range(0, 101) < tp)
+            if (Random.Range(0, 101) < tp)
             {
                 ev.IsAllowed = false;
                 igrok.RandomTeleport(typeof(Room));
