@@ -12,7 +12,9 @@ namespace thirdtask
     public class Plugin : Plugin<Config>
     {
         public override string Author => "gowa";
+        
         public override string Name => "pochemu";
+        
         public override string Prefix => "pizda";
 
         public static string Status = "Не готов";
