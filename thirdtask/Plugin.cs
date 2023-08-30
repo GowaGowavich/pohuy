@@ -57,31 +57,37 @@ namespace thirdtask
                     Team = "<color=green>ПХ";
                     break;
             }
-
-            if (ev.NewRole == RoleTypeId.Spectator || ev.NewRole == RoleTypeId.Overwatch)
+            if (Round.IsStarted)
             {
-                Spectators.Add(ev.Player);
-            }
-            else
-            {
-                Spectators.Remove(ev.Player);
-            }
+                if (ev.NewRole == RoleTypeId.Spectator || ev.NewRole == RoleTypeId.Overwatch)
+                {
+                    Spectators.Add(ev.Player);
+                }
+                else
+                {
+                    Spectators.Remove(ev.Player);
+                }
 
-            Timing.RunCoroutine(MyCoroutine());
+                Timing.RunCoroutine(MyCoroutine());
+            }
         }
 
         private void Warhead_ChangingLeverStatus(Exiled.Events.EventArgs.Warhead.ChangingLeverStatusEventArgs ev)
         {
-            switch (Warhead.CanBeStarted)
+            if (Warhead.IsDetonated != true)
             {
-                case true:
-                    Status = "Готов";
-                    break;
+                switch (Warhead.CanBeStarted)
+                {
+                    case true:
+                        Status = "Готов";
+                        break;
 
-                case false:
-                    Status = "Не готов";
-                    break;
+                    case false:
+                        Status = "Не готов";
+                        break;
+                }
             }
+            else { Status = "Боеголовка взорвана";};
         }
 
         private void Player_StayingOnEnvironmentalHazard(Exiled.Events.EventArgs.Player.StayingOnEnvironmentalHazardEventArgs ev)
@@ -137,7 +143,6 @@ namespace thirdtask
             {
                 ev.IsAllowed = false;
                 igrok.RandomTeleport(typeof(Room));
-                igrok.Broadcast(4, $"{tp}");
             }
         }
     }
