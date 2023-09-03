@@ -56,6 +56,7 @@ namespace thirdtask
                 case SpawnableTeamType.NineTailedFox:
                     Team = "<color=blue>НТФ";
                     break;
+                    
                 case SpawnableTeamType.ChaosInsurgency:
                     Team = "<color=green>ПХ";
                     break;
@@ -66,6 +67,7 @@ namespace thirdtask
                 {
                     Spectators.Add(ev.Player);
                 }
+                
                 else
                 {
                     Spectators.Remove(ev.Player);
@@ -119,6 +121,7 @@ namespace thirdtask
                     {
                         break;
                     }
+                    
                     else
                     {
                         Warhead.Start();
@@ -139,10 +142,12 @@ namespace thirdtask
                 var effect = Config.NegEffect.RandomItem();
                 igrok.EnableEffect(effect);
             }
+            
             if (Random.Range(0, 101) < damage)
             {
                 igrok.Hurt(Random.Range(0, 100));
             }
+            
             if (Random.Range(0, 101) < tp)
             {
                 ev.IsAllowed = false;
