@@ -23,6 +23,7 @@ namespace thirdtask
         public static string Team = "<color=blue>НТФ";
 
         public static List<Player> Spectators { get; } = new List<Player>() { };
+        
         public override void OnEnabled()
         {
             Exiled.Events.Handlers.Scp914.UpgradingPlayer += Scp914_UpgradingPlayer;
@@ -31,6 +32,7 @@ namespace thirdtask
             Exiled.Events.Handlers.Warhead.ChangingLeverStatus += Warhead_ChangingLeverStatus;
             Exiled.Events.Handlers.Player.ChangingRole += Player_ChangingRole;
         }
+        
         public IEnumerator<float> MyCoroutine()
         {
             for (; ; )
@@ -46,6 +48,7 @@ namespace thirdtask
                 yield return Timing.WaitForSeconds(1f);
             }
         }
+        
         private void Player_ChangingRole(Exiled.Events.EventArgs.Player.ChangingRoleEventArgs ev)
         {
             switch (RespawnTokensManager.DominatingTeam)
