@@ -108,7 +108,7 @@ namespace thirdtask
                 return;
 
             ev.Player.DisableEffect<Sinkhole>();
-            ev.Player.EnableEffect<Corroding>();
+            ev.Player.EnableEffect<PocketCorroding>();
         }
 
         private void Player_Died(Exiled.Events.EventArgs.Player.DiedEventArgs ev)
