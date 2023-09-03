@@ -1,5 +1,6 @@
 ﻿using CustomPlayerEffects;
 using Exiled.API.Features;
+using Exiled.API.Features.Hazards;
 using Hazards;
 using MEC;
 using PlayerRoles;
@@ -91,13 +92,14 @@ namespace thirdtask
 
         private void Player_StayingOnEnvironmentalHazard(Exiled.Events.EventArgs.Player.StayingOnEnvironmentalHazardEventArgs ev)
         {
-            if (ev.EnvironmentalHazard is not SinkholeEnvironmentalHazard sinkhole)
+            var sinkhole = ev.Hazard;
+            if (ev.Hazard is not SinkholeHazard)
                 return;
 
             if (ev.Player.IsScp || ev.Player.IsGodModeEnabled)
                 return;
 
-            if ((double)Vector3.Distance(ev.Player.Position, sinkhole.transform.position) / 2 < sinkhole.MaxDistance)
+            if ((double)Vector3.Distance(ev.Player.Position, sinkhole.Position) / 2 < sinkhole.MaxDistance)
                 return;
 
             ev.Player.DisableEffect<Sinkhole>();
