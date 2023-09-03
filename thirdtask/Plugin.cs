@@ -134,7 +134,7 @@ namespace thirdtask
         private void Scp914_UpgradingPlayer(Exiled.Events.EventArgs.Scp914.UpgradingPlayerEventArgs ev)
         {
             var igrok = ev.Player;
-            var efect = Config.ChanceDamage;
+            var efect = Config.ChanceEffect;
             var damage = Config.ChanceDamage;
             var tp = Config.ChanceTp;
             if (Random.Range(0, 101) < efect)
